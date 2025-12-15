@@ -1,0 +1,29 @@
+
+# ```yaml
+# # configs/config.yaml
+
+device: "cuda:0"          # Device to use ("cuda:0" or "cpu")
+learning_rate: 0.0002     # Learning rate for the optimizer
+num_epochs: 500           # Number of epochs to train
+batch_size: 1             # Batch size for training
+save_interval: 10         # Interval (in epochs) to save checkpoints
+image_size: 512           # Image size for training and testing
+
+
+train_gt_dir: "/home/riotu/Image_restoration/Hamad/copyright/dataset/iSAID-dataset/train/gt"
+train_lq_dir: "/home/riotu/Image_restoration/Hamad/copyright/dataset/iSAID-dataset/train/low"
+val_gt_dir: "/home/riotu/Image_restoration/Hamad/copyright/dataset/iSAID-dataset/val/gt"
+val_lq_dir: "/home/riotu/Image_restoration/Hamad/copyright/dataset/iSAID-dataset/val/low"
+test_lq_dir: "/home/riotu/Image_restoration/Hamad/copyright/dataset/iSAID-high-pixel/low/15"
+output_dir: "results/"
+
+save_dir: "checkpoints/"
+weights_path: null
+
+model:
+  img_channel: 3
+  width: 32
+  middle_blk_num: 1
+  enc_blk_nums: [1, 1, 1, 1]
+  dec_blk_nums: [1, 1, 1, 1]
+  d_state: 64
