@@ -1,6 +1,6 @@
 
 
-# SSVA: Self-Scanned Visual Attention for Enhanced Mask-Free Shadow Removal
+# DG_Mamba: Self-Scanned Visual Attention for Enhanced Mask-Free Shadow Removal
 
 This repository contains the official PyTorch implementation of **SSVA-Net**, a novel mask-free shadow removal framework submitted to CVPR 2025.
 

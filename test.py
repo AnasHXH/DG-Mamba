@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from torchvision.utils import save_image
 from PIL import Image
-from models.Dual_DBRSNet import DualBranch_DBRSNet 
+from models.DG_Mamba import DGMamba 
 import yaml
 
 def test():
@@ -52,7 +52,7 @@ def test():
     test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
     # Initialize model
-    model = DualBranch_DBRSNet(**config['model'])
+    model = DGMamba(**config['model'])
     model.load_state_dict(torch.load(config['weights_path'], map_location=device))
     model.to(device)
     model.eval()

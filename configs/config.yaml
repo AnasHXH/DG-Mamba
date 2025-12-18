@@ -4,7 +4,7 @@
 
 device: "cuda:0"          # Device to use ("cuda:0" or "cpu")
 learning_rate: 0.0002     # Learning rate for the optimizer
-num_epochs: 500           # Number of epochs to train
+num_epochs: 500        # Number of epochs to train
 batch_size: 1             # Batch size for training
 save_interval: 10         # Interval (in epochs) to save checkpoints
 image_size: 512           # Image size for training and testing

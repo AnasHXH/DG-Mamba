@@ -6,7 +6,7 @@ from PIL import Image
 from torch.utils.data import Dataset
 import torchvision.transforms.functional as TF
 
-class ShadowRemovalDataset(Dataset):
+class NightRemovalDataset(Dataset):
     def __init__(self, gt_dir, lq_dir, transform=None, augment=False):
         self.gt_dir = gt_dir
         self.lq_dir = lq_dir

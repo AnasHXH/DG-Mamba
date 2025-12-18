@@ -1,24 +1,4 @@
-# Python
 __pycache__/
 *.pyc
-*.pyo
-
-# Jupyter
 .ipynb_checkpoints/
-
-# Data & Results
-data/
-Results/
-figures/
-losses/
-
-# Weights
-weights/
-
-# OS
 .DS_Store
-Thumbs.db
-
-# Virtual env
-venv/
-.env
