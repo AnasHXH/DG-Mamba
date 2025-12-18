@@ -26,7 +26,7 @@ visual quality and downstream vision tasks (e.g., object detection).
 
 ## 🧠 Architecture & Visual Results
 
-![DG-Mamba Architecture](./figures/Arch.png)  
+![DG-Mamba Architecture](./figures/Arch_1.png)  
 **Figure 1:** Overall architecture of the proposed DG-Mamba framework.
 
 ![Qualitative Results](./figures/Qualitative.png)  
@@ -149,13 +149,13 @@ DG-Mamba/
 ---
 ## ⚙️ Installation
 ```
-git clone https://github.com/AnasHXH/DBRSNet-Dual-Branch.git
-cd DBRSNet-Dual-Branch
+git clone https://github.com/AnasHXH/DG-Mamba.git
+cd DG-Mamba
 
 python -m venv .venv
 source .venv/bin/activate
-
 pip install -r requirements.txt
+
 ```
 ---
 ## 📁 Data Preparation (Recommended Format)
@@ -204,27 +204,30 @@ Common options you may expose (depending on your code):
   ```
 python evaluate.py \
   --config configs/eval_isai_dark.yaml \
-  --ckpt checkpoints/dbresnet_best.pth
+  --ckpt checkpoints/dg_mamba_best.pth
+
   ```
 ---
 ## 🖼️ Inference (Single Folder)
   ```
 python test.py \
-  --ckpt checkpoints/dbresnet_best.pth \
-  --input_dir  path/to/low_light_images \
+  --ckpt checkpoints/dg_mamba_best.pth \
+  --input_dir path/to/low_light_images \
   --output_dir outputs/
+
   ```
 ---
 
 ## 📌 Citation
 If you use this work, please cite:
   ```
-@article{ali_dbrsnet_2025,
-  title   = {Dual-Branch Self-Scanned Visual Attention Network for Low-Light Remote Sensing Image Enhancement},
+@article{ali_dgmamba_2025,
+  title   = {DG-Mamba: Dual-Granularity Mamba Network for Low-Light Remote Sensing Image Enhancement},
   author  = {Ali, Anas M. and Benjdira, Bilel and Aloqayli, Hamad and Othman, Esam and Boulila, Wadii},
   journal = {Under Review},
   year    = {2025}
 }
+
   ```
 ---
 
