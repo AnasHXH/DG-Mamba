@@ -1,159 +1,150 @@
-# DBRSNet: Dual-Branch Self-Scanned Visual Attention Network for Low-Light Remote Sensing Image Enhancement
+# DG-Mamba: Dual-Granularity Mamba Network for Low-Light Remote Sensing Image Enhancement
 
-Official PyTorch implementation of **DBRSNet**, a **dual-branch U-Net-style** framework for **low-light nighttime remote sensing image enhancement**.
+Official PyTorch implementation of **DG-Mamba**, a **dual-branch encoder–decoder framework**
+designed for **low-light and nighttime remote sensing image enhancement**.
 
 ---
 
 ## 🔥 Overview
 
-Nighttime remote sensing images often suffer from underexposure, strong noise, low contrast, and color distortion, which can harm both visual quality and downstream tasks like object detection :contentReference[oaicite:2]{index=2}.  
-DBRSNet addresses this using:
+Low-light and nighttime remote sensing images often suffer from severe underexposure,
+strong noise, low contrast, and color distortion, which significantly degrade both
+visual quality and downstream vision tasks (e.g., object detection).
 
-- **Dual-Branch Encoder–Decoder (U-Net style)** to jointly model **illumination restoration** and **structural refinement** :contentReference[oaicite:3]{index=3}  
-- **EVSSBlocks** with a **Context-Aware Feature Mixer (CAFM)** integrating:
-  - **Simple Selective Scanning (SSS)**
-  - **Channel Attention (CAM)**
-  - **ASPP (multi-scale context)**
-  :contentReference[oaicite:4]{index=4}  
-- **Night Illumination Restoration Loss (NIRL)** combining **pixel**, **perceptual**, and **frequency-domain** terms :contentReference[oaicite:5]{index=5}  
+**DG-Mamba** addresses these challenges through:
+
+- **Dual-Branch Encoder–Decoder Architecture (U-Net style)**  
+  for jointly modeling **illumination enhancement** and **structural refinement**
+- **Mamba-based Selective State Space Modeling**  
+  to efficiently capture **long-range spatial dependencies** with low computational cost
+- **Context-Aware Feature Fusion**  
+  integrating local details and global contextual information
+- **Composite Enhancement Loss**  
+  combining pixel-level, perceptual, and frequency-aware constraints
 
 ---
 
 ## 🧠 Architecture & Visual Results
 
-![DBRSNet Architecture](./figures/Arch.png)
-**Figure 1:** DBRSNet dual-branch pipeline.
+![DG-Mamba Architecture](./figures/Arch.png)  
+**Figure 1:** Overall architecture of the proposed DG-Mamba framework.
 
-![Qualitative Results](./figures/Qualitative.png)
-**Figure 2:** Qualitative comparisons.
+![Qualitative Results](./figures/Qualitative.png)  
+**Figure 2:** Qualitative comparisons on low-light remote sensing images.
 
-![Quantitative Results](./figures/Quantitative.png)
-**Figure 3:** Quantitative comparisons.
+![Quantitative Results](./figures/Quantitative.png)  
+**Figure 3:** Quantitative performance comparison.
 
 ---
 
 ## 📦 Datasets
 
-This project uses both **paired** and **unpaired** low-light benchmarks (as used in the paper) :contentReference[oaicite:6]{index=6}.
+DG-Mamba is evaluated on both **paired (reference-based)** and
+**unpaired (no-reference)** low-light datasets, following the experimental setup
+used in the paper.
 
-### Paired / Supervised
-- **LOL Dataset** (paired):  
+### 🔹 Paired / Supervised Datasets
+
+- **LOL Dataset (paired)**  
   https://drive.google.com/file/d/1L-kqSQyrmMueBh_ziWoPFhfsAh50h20H/view
-- **iSAID-dark Dataset** (paired remote sensing):  
+
+- **iSAID-dark Dataset (paired, remote sensing)**  
   https://drive.google.com/file/d/1mlTTdbqG1ZheaWsBcIjAKDyCdbuAqpvy/view
 
-### Unpaired / No-Reference (Generalization)
-- **darkrs Dataset** (real nighttime RS):  
-  https://drive.google.com/file/d/1XQGpzB9vDGkO7ULnGOF86cyZdqtrX4tI/view
-- **ExDark Dataset** (natural images):  
-  https://github.com/cs-chan/Exclusively-Dark-Image-Dataset?tab=readme-ov-file
+### 🔹 Unpaired / No-Reference Datasets
 
-> Notes:
-> - For unpaired datasets, evaluation can be done using **NIQE** (no-reference quality).
-> - For paired datasets, common metrics are **PSNR / SSIM / LPIPS**.
+- **darkrs Dataset (real nighttime remote sensing)**  
+  https://drive.google.com/file/d/1XQGpzB9vDGkO7ULnGOF86cyZdqtrX4tI/view
+
+- **ExDark Dataset (natural images)**  
+  https://github.com/cs-chan/Exclusively-Dark-Image-Dataset
+
+> **Evaluation Notes**
+> - Paired datasets: **PSNR ↑ / SSIM ↑ / LPIPS ↓**
+> - Unpaired datasets: **NIQE ↓** + qualitative comparison
 
 ---
 
 ## 📊 Results and Outputs
 
-We provide comprehensive qualitative and quantitative results for both **paired (reference-based)** and **unpaired (no-reference)** low-light datasets to demonstrate the robustness and generalization capability of **DBRSNet-Dual-Branch**.
+We provide comprehensive qualitative and quantitative results for both
+paired and unpaired datasets to demonstrate the robustness and generalization
+capability of **DG-Mamba**.
 
 ---
 
 ## 🔹 Paired Datasets (Reference-Based Evaluation)
 
-For paired datasets, ground-truth reference images are available. Performance is evaluated using **PSNR**, **SSIM**, and **LPIPS** metrics.
-
 ### 📁 Datasets
 - **iSAID-dark**
-- **iSAID-dark (high-pixel)**
+- **iSAID-dark (high-pixel resolution)**
 
 ### 📥 Results Download Links
 
 | Dataset | Resolution | Results |
-|-------|------------|---------|
-| iSAID-dark | Standard Resolution | 🔗 [Download Results](https://drive.google.com/drive/folders/1oh_hp_s5YUnyiYvtkP7ewxE422Z0mKs3?usp=sharing) |
-| iSAID-dark (high-pixel) | High Resolution | 🔗 [Download Results](https://drive.google.com/drive/folders/1acF9DR0vrX2WoR2q-NtjHSd453XfR4cv?usp=sharing) |
-
-> Each results folder contains enhanced images generated by DBRSNet, organized following the original dataset structure for easy comparison.
+|------|------------|--------|
+| iSAID-dark | Standard | 🔗 [Download](https://drive.google.com/drive/folders/1oh_hp_s5YUnyiYvtkP7ewxE422Z0mKs3?usp=sharing) |
+| iSAID-dark (High-Pixel) | High | 🔗 [Download](https://drive.google.com/drive/folders/1acF9DR0vrX2WoR2q-NtjHSd453XfR4cv?usp=sharing) |
 
 ---
 
 ## 🔹 Unpaired Datasets (No-Reference Evaluation)
 
-For unpaired datasets, no ground-truth references are available. Evaluation is conducted using **no-reference image quality metrics**, primarily **NIQE**, alongside qualitative visual comparisons.
-
 ### 📁 Datasets
-- **darkrs**
-- **LIME**
-- **NPE**
-- **DICM**
+- darkrs
+- LIME
+- NPE
+- DICM
 
 ### 📥 Results Download Links
 
 | Dataset | Results |
-|-------|---------|
-| darkrs | 🔗 [Download Results](https://drive.google.com/file/d/1Xu9_3nT6ZbLd6cIXgo4PnmVdqIUU4-Oe/view?usp=sharing) |
-| LIME | 🔗 [Download Results](https://drive.google.com/file/d/1U93HRF4LdPdHVV_Coo1lyay9E-u5bjvO/view?usp=sharing) |
-| NPE | 🔗 [Download Results](https://drive.google.com/file/d/1YoVyZfW9RauM0RgQ3sqLYhcT-Q8AfTqn/view?usp=sharing) |
-| DICM | 🔗 [Download Results](https://drive.google.com/file/d/1wiPme_xc-JVQqCuh2_EqgPe4zyMQgQcf/view?usp=sharing) |
-
-> These datasets are used to evaluate the generalization performance of DBRSNet on real-world low-light scenes with diverse illumination conditions.
-
----
-
-## 📝 Evaluation Notes
-
-- **Paired datasets** are evaluated using: **PSNR ↑**, **SSIM ↑**, and **LPIPS ↓**.
-- **Unpaired datasets** are evaluated using **NIQE ↓** and qualitative inspection.
-- All results are generated using the **same trained dual-branch DBRSNet model**, without dataset-specific fine-tuning.
+|------|--------|
+| darkrs | 🔗 [Download](https://drive.google.com/file/d/1Xu9_3nT6ZbLd6cIXgo4PnmVdqIUU4-Oe/view?usp=sharing) |
+| LIME | 🔗 [Download](https://drive.google.com/file/d/1U93HRF4LdPdHVV_Coo1lyay9E-u5bjvO/view?usp=sharing) |
+| NPE | 🔗 [Download](https://drive.google.com/file/d/1YoVyZfW9RauM0RgQ3sqLYhcT-Q8AfTqn/view?usp=sharing) |
+| DICM | 🔗 [Download](https://drive.google.com/file/d/1wiPme_xc-JVQqCuh2_EqgPe4zyMQgQcf/view?usp=sharing) |
 
 ---
 
 ## 🎯 Downstream Task: Object Detection with YOLOv12
 
-To verify that the enhanced images are not only visually improved but also **beneficial for downstream vision tasks**, we evaluate **object detection performance using YOLOv12**.  
-We run YOLOv12 on three versions of the same validation set:
+To verify that enhancement improves **practical vision tasks**, we evaluate
+object detection performance using **YOLOv12** on three image versions:
 
-- **Night**: original low-light/night images (baseline)
-- **DBRSNet**: images enhanced by our DBRSNet-Dual-Branch model
-- **GT**: corresponding ground-truth / well-lit images (upper bound reference)
+- **Night**: original low-light images
+- **DG-Mamba**: enhanced images
+- **GT**: ground-truth / well-lit images (upper bound)
 
-This provides a clear comparison of how enhancement affects detection quality (e.g., better visibility, clearer edges, improved object contrast).
+### 📥 YOLOv12 Detection Results
 
-### 📥 YOLOv12 Detection Outputs (Download Links)
+| Version | Description | Link |
+|------|------------|------|
+| Night | Original low-light images | 🔗 [Download](https://drive.google.com/drive/folders/1xkfBDKB98xEC-OqCcYb9FkecpU3hk-0B?usp=sharing) |
+| DG-Mamba | Enhanced images | 🔗 [Download](https://drive.google.com/drive/folders/17Fm9HbNcQAoLuA6q77yoywIZ2JZ_Fi2B?usp=sharing) |
+| GT | Reference images | 🔗 [Download](https://drive.google.com/drive/folders/1rN2NNkRWmUnSe-317lIy8w1kYK3pZ7wb?usp=sharing) |
 
-| Folder | Description | Link |
-|---|---|---|
-| **Night** | YOLOv12 predictions on the original low-light images | 🔗 [Download](https://drive.google.com/drive/folders/1xkfBDKB98xEC-OqCcYb9FkecpU3hk-0B?usp=sharing) |
-| **DBRSNet** | YOLOv12 predictions on images enhanced by DBRSNet | 🔗 [Download](https://drive.google.com/drive/folders/17Fm9HbNcQAoLuA6q77yoywIZ2JZ_Fi2B?usp=sharing) |
-| **GT** | YOLOv12 predictions on the ground-truth / reference images | 🔗 [Download](https://drive.google.com/drive/folders/1rN2NNkRWmUnSe-317lIy8w1kYK3pZ7wb?usp=sharing) |
+---
 
-> Each folder contains visualization images (e.g., `val_batch*_pred_*.jpg/png`) with predicted bounding boxes and class labels.
-
-### 📝 Notes
-- If DBRSNet improves detection, you should observe **more correct detections**, **higher confidence**, and **fewer missed objects** compared to the *Night* baseline.
-- The *GT* results indicate the expected upper-bound performance when illumination is ideal.
-
---- 
-
-
-
-## 🗂️ Repository Structure (Current)
+## 🗂️ Repository Structure
 
 ```text
-DBRSNet-Dual-Branch/
-├── configs/                 # config files (training/eval)
-├── data/                    # dataset placeholders / instructions
-├── figures/                 # Arch.png, Qualitative.png, Quantitative.png
-├── losses/                  # NIRL + other losses
-├── models/                  # DBRSNet + blocks (EVSSBlock/CAFM/SSS/CAM)
-├── utils/                   # metrics, io, helpers
-├── train.py                 # training entry
-├── evaluate.py              # evaluation entry
-├── test.py                  # quick testing / inference (optional)
+DG-Mamba/
+├── checkpoints/            # empty (saved checkpoints)
+├── configs/                # training / evaluation configs
+├── data/                   # dataset loaders (no raw data)
+├── figures/                # paper figures
+├── losses/                 # loss functions
+├── models/                 # DG-Mamba architecture
+├── results/                # empty (output placeholders)
+├── utils/                  # metrics and helpers
+├── weights/                # empty (pretrained models)
+├── train.py
+├── evaluate.py
+├── test.py
 ├── requirements.txt
 └── README.md
+
 ```
 ---
 ## ⚙️ Installation
